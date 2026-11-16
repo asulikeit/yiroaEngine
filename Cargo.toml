@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/jamsil-vfs",
+    "crates/jamsil-page",
+    "crates/jamsil-wal",
+    "crates/jamsil-bufmgr",
+    "crates/jamsil-txn",
+    "crates/jamsil-heap",
+    "crates/jamsil-engine",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+
+[workspace.dependencies]
+crc32c = "0.6"
+parking_lot = "0.12"
+thiserror = "1"
+libc = "0.2"

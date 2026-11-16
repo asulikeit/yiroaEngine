@@ -1,0 +1,19 @@
+[package]
+name = "jamsil-txn"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thiserror.workspace = true
+jamsil-vfs = { path = "../jamsil-vfs" }
+jamsil-page = { path = "../jamsil-page" }
+jamsil-wal = { path = "../jamsil-wal" }
+jamsil-bufmgr = { path = "../jamsil-bufmgr" }
+
+# Loom checks the sequence lock of the published state (spec 12.3, 18.5); see loom.sh.
+[target.'cfg(loom)'.dependencies]
+loom = "0.7"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }

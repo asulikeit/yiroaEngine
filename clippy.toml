@@ -1,0 +1,14 @@
+# Engine code takes its locks, condition variables and threads from `jamsil_vfs::sync`, and its
+# files from `jamsil_vfs` (spec 5.3 rule 7, 19.2). Only those modules may use the underlying types.
+disallowed-types = [
+    { path = "parking_lot::Mutex", reason = "use jamsil_vfs::sync::Mutex" },
+    { path = "parking_lot::RwLock", reason = "use jamsil_vfs::sync::RwLock" },
+    { path = "parking_lot::Condvar", reason = "use jamsil_vfs::sync::Condvar" },
+    { path = "std::sync::Mutex", reason = "use jamsil_vfs::sync::Mutex" },
+    { path = "std::sync::RwLock", reason = "use jamsil_vfs::sync::RwLock" },
+    { path = "std::sync::Condvar", reason = "use jamsil_vfs::sync::Condvar" },
+]
+disallowed-methods = [
+    { path = "std::thread::spawn", reason = "use jamsil_vfs::sync::thread::spawn_named" },
+    { path = "std::thread::sleep", reason = "use jamsil_vfs::sync::thread::sleep" },
+]

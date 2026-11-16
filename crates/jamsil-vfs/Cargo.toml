@@ -1,0 +1,17 @@
+[package]
+name = "jamsil-vfs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+libc.workspace = true
+parking_lot.workspace = true
+thiserror.workspace = true
+
+# Loom replaces the facade's atomics (`RUSTFLAGS="--cfg loom"`, see loom.sh).
+[target.'cfg(loom)'.dependencies]
+loom = "0.7"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }

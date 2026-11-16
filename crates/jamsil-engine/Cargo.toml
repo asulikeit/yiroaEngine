@@ -1,0 +1,21 @@
+[package]
+name = "jamsil-engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+crc32c.workspace = true
+thiserror.workspace = true
+jamsil-vfs = { path = "../jamsil-vfs" }
+jamsil-page = { path = "../jamsil-page" }
+jamsil-wal = { path = "../jamsil-wal" }
+jamsil-bufmgr = { path = "../jamsil-bufmgr" }
+jamsil-txn = { path = "../jamsil-txn" }
+jamsil-heap = { path = "../jamsil-heap" }
+
+[target.'cfg(loom)'.dev-dependencies]
+loom = "0.7"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }

@@ -1,0 +1,19 @@
+[package]
+name = "jamsil-bufmgr"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+crc32c.workspace = true
+thiserror.workspace = true
+jamsil-vfs = { path = "../jamsil-vfs" }
+jamsil-page = { path = "../jamsil-page" }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }
+
+[dev-dependencies]
+# The allocation test (tests/no_alloc.rs) runs the WAL's insert; jamsil-wal does not depend on
+# jamsil-bufmgr, so there is no cycle.
+jamsil-wal = { path = "../jamsil-wal" }
